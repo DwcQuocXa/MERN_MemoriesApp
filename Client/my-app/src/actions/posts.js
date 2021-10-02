@@ -3,8 +3,9 @@ import * as api from "../api";
 //Action Creators
 export const getPosts = () => async (dispatch) => {
   try {
-    const response = await api.fetchPosts();
-    dispatch({ type: "FETCH_ALL", payload: response.data });
+    const { data } = await api.fetchPosts();
+    dispatch({ type: "FETCH_ALL", payload: data });
+    console.log(data);
   } catch (error) {
     console.log(error.message);
   }
