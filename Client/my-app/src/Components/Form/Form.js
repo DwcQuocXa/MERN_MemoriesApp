@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./style";
 import { Paper, Typography, TextField, Button } from "@mui/material";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../actions/posts";
+import { setCurrentId } from "../../actions/currentId";
 
 function Form() {
   const [postData, setPostData] = useState({
@@ -14,6 +15,16 @@ function Form() {
     selectedFile: "",
   });
   const dispatch = useDispatch();
+  const currentId = useSelector((state) => state.currentId);
+  const postToUpdate = useSelector((state) =>
+    currentId ? state.posts.find((post) => post._id === currentId) : null
+  );
+
+  useEffect(() => {
+    if (postToUpdate) {
+      setPostData(postToUpdate);
+    }
+  }, [postToUpdate]);
 
   const handleClear = () => {
     setPostData({
@@ -23,12 +34,19 @@ function Form() {
       tags: "",
       selectedFile: "",
     });
+    dispatch(setCurrentId(null));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(createPost(postData));
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+      console.log(postData);
+      handleClear();
+    } else {
+      dispatch(createPost(postData));
+      handleClear();
+    }
   };
 
   //console.log(postData);
