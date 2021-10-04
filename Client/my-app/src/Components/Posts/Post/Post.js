@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useStyles from "./style";
 import {
   Card,
@@ -11,7 +11,7 @@ import {
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import moment from "moment";
+//import moment from "moment";
 import { useDispatch } from "react-redux";
 import { setCurrentId } from "../../../actions/currentId";
 
