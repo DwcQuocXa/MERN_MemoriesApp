@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -55,6 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm);
 
   return (
     <Container maxidth="lg">
@@ -76,6 +78,9 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
             />
           </Search>
         </Toolbar>
@@ -89,7 +94,7 @@ export default function SearchAppBar() {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts searchTerm={searchTerm} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Form />
