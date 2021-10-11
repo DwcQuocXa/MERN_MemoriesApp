@@ -1,6 +1,8 @@
 import { makeStyles } from "@mui/styles";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
   appBar: {
     borderRadius: 15,
     margin: "30px 0",
@@ -15,4 +17,15 @@ export default makeStyles(() => ({
   image: {
     marginLeft: "15px",
   },
+  // "@media (max-width: 600px)": {
+  //   mainContainer: {
+  //     flexDirection: "column-reverse",
+  //   },
+  // },
+
+  // [theme.breakpoints.down("sm")]: {
+  //   mainContainer: {
+  //     flexDirection: "column-reverse",
+  //   },
+  // },
 }));

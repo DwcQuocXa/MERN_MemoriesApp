@@ -10,6 +10,8 @@ import { Grow, Grid, Container } from "@mui/material";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import useStyles from "./style";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import BackToTop from "./BackToTop";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,55 +55,74 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const ResponsiveForm = styled("div")(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column-reverse",
+  },
+}));
+
+const styles = (theme) => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+    },
+  },
+});
+
+const theme = createTheme();
+
 export default function SearchAppBar() {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(searchTerm);
 
   return (
-    <Container maxidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Toolbar>
-          <Typography className={classes.heading} variant="h2" align="center">
-            Memories
-            <img
-              className={classes.image}
-              src={memories}
-              alt="memories"
-              height="60"
-            />
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-              }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="stretch"
-            spacing={3}
-          >
-            <Grid item xs={12} sm={7}>
-              <Posts searchTerm={searchTerm} />
+    <ThemeProvider theme={theme}>
+      <Container maxidth="lg">
+        <AppBar className={classes.appBar} position="static" color="inherit">
+          <Toolbar>
+            <Typography className={classes.heading} variant="h2" align="center">
+              Memories
+              <img
+                className={classes.image}
+                src={memories}
+                alt="memories"
+                height="60"
+              />
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+              />
+            </Search>
+          </Toolbar>
+        </AppBar>
+        <Grow in>
+          <Container>
+            <Grid
+              container
+              justify="space-between"
+              alignItems="stretch"
+              spacing={3}
+              className={classes.mainContainer}
+            >
+              <Grid item xs={12} sm={7}>
+                <Posts searchTerm={searchTerm} />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Form />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+          </Container>
+        </Grow>
+        <BackToTop />
+      </Container>
+    </ThemeProvider>
   );
 }
