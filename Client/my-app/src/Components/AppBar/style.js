@@ -1,6 +1,4 @@
 import { makeStyles } from "@mui/styles";
-import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
 
 export default makeStyles((theme) => ({
   appBar: {
