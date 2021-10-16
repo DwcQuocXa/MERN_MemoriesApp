@@ -5,10 +5,10 @@ import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 import { setCurrentId } from "../../actions/currentId";
-import Snackbar from "./Snackbar";
+import CusSnackbars from "../Snackbar/Snackbar";
 
 function Form() {
-  const [open, setOpen] = useState(false);
+  const [snackBar, setSnackBar] = useState(false);
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -46,12 +46,12 @@ function Form() {
       handleClear();
     } else {
       dispatch(createPost(postData));
-      setOpen(true);
+      setSnackBar(true);
       handleClear();
     }
   };
 
-  //console.log(postData);
+  console.log("Form rendering");
   const classes = useStyles();
 
   return (
@@ -130,7 +130,11 @@ function Form() {
           Clear
         </Button>
       </Paper>
-      <Snackbar open={open} setOpen={setOpen} />
+      <CusSnackbars
+        snackBar={snackBar}
+        setSnackBar={setSnackBar}
+        message="Create a memory successfully"
+      />
     </div>
   );
 }
