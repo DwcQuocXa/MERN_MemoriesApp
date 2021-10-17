@@ -51,7 +51,6 @@ function Form() {
     }
   };
 
-  console.log("Form rendering");
   const classes = useStyles();
 
   return (

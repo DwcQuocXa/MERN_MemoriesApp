@@ -11,8 +11,6 @@ function Posts({ searchTerm }) {
   const [snackBar, setSnackBar] = useState(false);
   const classes = useStyles();
 
-  console.log("Posts rendering");
-
   return !posts.length ? (
     <CircularProgress />
   ) : (
