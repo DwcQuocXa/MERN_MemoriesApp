@@ -3,9 +3,9 @@ import useStyles from "./style";
 import { Paper, Typography, TextField, Button } from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../../actions/posts";
-import { setCurrentId } from "../../actions/currentId";
-import CusSnackbars from "../Snackbar/Snackbar";
+import { createPost, updatePost } from "../../../actions/posts";
+import { setCurrentId } from "../../../actions/currentId";
+import CusSnackbars from "../../Snackbar/Snackbar";
 
 function Form() {
   const [snackBar, setSnackBar] = useState(false);

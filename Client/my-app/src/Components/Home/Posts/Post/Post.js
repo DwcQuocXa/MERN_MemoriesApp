@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useStyles from "./style";
 import {
   Card,
   CardActions,
@@ -10,12 +9,13 @@ import {
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import EditIcon from "@mui/icons-material/Edit";
 import Moment from "react-moment";
 import { useDispatch } from "react-redux";
 
-import { setCurrentId } from "../../../actions/currentId";
-import { deletePost, likePost } from "../../../actions/posts";
+import useStyles from "./style";
+import { setCurrentId } from "../../../../actions/currentId";
+import { deletePost, likePost } from "../../../../actions/posts";
 import DeleteModal from "./DeleteModal/DeleteModal";
 
 function Post({ post, setSnackBar }) {
@@ -55,13 +55,13 @@ function Post({ post, setSnackBar }) {
         </div>
         <div className={classes.overlay2}>
           <Button
-            style={{ color: "white" }}
+            style={{ color: "white", paddingLeft: 50 }}
             size="small"
             onClick={() => {
               handleUpdate();
             }}
           >
-            <MoreHorizIcon />
+            <EditIcon fontSize="small" />
           </Button>
         </div>
         <div className={classes.details}>
@@ -104,4 +104,4 @@ function Post({ post, setSnackBar }) {
   );
 }
 
-export default Post;
+export default React.memo(Post);

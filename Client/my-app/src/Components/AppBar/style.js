@@ -6,24 +6,18 @@ export default makeStyles((theme) => ({
     marginBottom: 30,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "10px 50px",
   },
   heading: {
     color: "rgba(0,183,255, 1)",
+    textDecoration: "none",
   },
   image: {
     marginLeft: "15px",
   },
-  // "@media (max-width: 600px)": {
-  //   mainContainer: {
-  //     flexDirection: "column-reverse",
-  //   },
-  // },
-
-  // [theme.breakpoints.down("sm")]: {
-  //   mainContainer: {
-  //     flexDirection: "column-reverse",
-  //   },
-  // },
+  brandContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
 }));

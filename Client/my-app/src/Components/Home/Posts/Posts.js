@@ -3,7 +3,7 @@ import { Grid, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import Post from "./Post/Post";
-import CusSnackbars from "../Snackbar/Snackbar";
+import CusSnackbars from "../../Snackbar/Snackbar";
 import useStyles from "./style";
 
 function Posts({ searchTerm }) {
@@ -26,7 +26,7 @@ function Posts({ searchTerm }) {
             if (searchTerm === "") {
               return post;
             } else if (
-              post.creator.toLowerCase().includes(searchTerm.toLowerCase())
+              post.title.toLowerCase().includes(searchTerm.toLowerCase())
             ) {
               return post;
             }
@@ -46,4 +46,4 @@ function Posts({ searchTerm }) {
   );
 }
 
-export default Posts;
+export default React.memo(Posts);

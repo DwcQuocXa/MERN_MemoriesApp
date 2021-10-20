@@ -11,11 +11,7 @@ import {
 
 import style from "./style";
 
-export default function DeleteModal({
-  deleteModal,
-  setDeleteModal,
-  handleDelete,
-}) {
+function DeleteModal({ deleteModal, setDeleteModal, handleDelete }) {
   const handleNo = () => setDeleteModal(false);
 
   return (
@@ -56,3 +52,5 @@ export default function DeleteModal({
     </Modal>
   );
 }
+
+export default React.memo(DeleteModal);
