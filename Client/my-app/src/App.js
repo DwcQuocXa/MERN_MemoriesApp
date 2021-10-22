@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Container maxidth="lg">
+      <Container maxWidth="lg">
         <NavBar setSearchTerm={setSearchTerm} />
         <Switch>
           <Route
