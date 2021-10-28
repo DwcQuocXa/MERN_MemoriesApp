@@ -18,8 +18,6 @@ app.get("/", (req, res) => {
   res.send("Deploy successfully");
 });
 
-//const url =
-//  "mongodb+srv://luongkill:luong123@cluster0.3eem9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose

@@ -26,7 +26,6 @@ export default function LogIn({ user }) {
             variant="contained"
             className={classes.logout}
             color="secondary"
-            //onClick={logout}
           >
             Logout
           </Button>
