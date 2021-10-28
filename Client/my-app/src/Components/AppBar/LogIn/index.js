@@ -1,12 +1,21 @@
 import React from "react";
 
 import { Toolbar, Typography, Avatar, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import useStyles from "./style";
 
-export default function LogIn({ user }) {
+export default function LogIn({ user, setUser }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
+  };
 
   return (
     <Toolbar className={classes.toolbar}>
@@ -26,6 +35,7 @@ export default function LogIn({ user }) {
             variant="contained"
             className={classes.logout}
             color="secondary"
+            onClick={logout}
           >
             Logout
           </Button>

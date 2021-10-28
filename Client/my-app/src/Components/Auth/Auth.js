@@ -10,6 +10,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import useStyle from "./style";
 import Input from "./Input";
@@ -19,7 +20,9 @@ const Auth = () => {
   const classes = useStyle();
   const [showPass, setShowPass] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const handleSubmit = () => {};
   const handleChange = () => {};
   const handleShowPass = () => {
@@ -38,6 +41,7 @@ const Auth = () => {
 
     try {
       dispatch({ type: "AUTH", data: { result, token } });
+      history.push("/");
     } catch (error) {
       console.log(error);
     }

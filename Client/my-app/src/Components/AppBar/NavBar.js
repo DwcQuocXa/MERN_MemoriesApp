@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import memories from "../../images/memories.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import useStyles from "./style";
 import BackToTop from "./BackToTop";
@@ -14,8 +14,16 @@ const theme = createTheme();
 export default function SearchAppBar({ setSearchTerm }) {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const location = useLocation();
 
   console.log(user);
+
+  useEffect(() => {
+    //const token = user?.token;
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
   return (
     <ThemeProvider theme={theme}>
       <BackToTop />
@@ -37,7 +45,7 @@ export default function SearchAppBar({ setSearchTerm }) {
             />
           </Typography>
           <SearchBar setSearchTerm={setSearchTerm} />
-          <LogIn user={user} />
+          <LogIn user={user} setUser={setUser} />
         </div>
       </AppBar>
     </ThemeProvider>
