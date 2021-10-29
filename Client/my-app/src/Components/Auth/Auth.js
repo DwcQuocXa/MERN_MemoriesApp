@@ -15,16 +15,36 @@ import { useHistory } from "react-router-dom";
 import useStyle from "./style";
 import Input from "./Input";
 import Icon from "./icon";
+import { signin, signup } from "../../actions/auth";
 
 const Auth = () => {
-  const classes = useStyle();
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
   const [showPass, setShowPass] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [formData, setFormData] = useState(initialState);
+
+  const classes = useStyle();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPass = () => {
     setShowPass(!showPass);
   };
