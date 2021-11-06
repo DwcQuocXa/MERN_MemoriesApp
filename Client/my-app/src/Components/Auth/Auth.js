@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import useStyle from "./style";
 import Input from "./Input";
 import Icon from "./icon";
-import { signin, signup } from "../../actions/auth";
+import { signIn, signUp } from "../../actions/auth";
 
 const Auth = () => {
   const initialState = {
@@ -37,9 +37,9 @@ const Auth = () => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(formData, history));
+      dispatch(signUp(formData, history));
     } else {
-      dispatch(signin(formData, history));
+      dispatch(signIn(formData, history));
     }
   };
   const handleChange = (e) => {
