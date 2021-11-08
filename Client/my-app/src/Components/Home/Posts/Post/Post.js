@@ -10,6 +10,7 @@ import {
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import Moment from "react-moment";
 import { useDispatch } from "react-redux";
 
@@ -22,6 +23,7 @@ function Post({ post, setSnackBar }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [deleteModal, setDeleteModal] = useState(false);
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleUpdate = () => {
     dispatch(setCurrentId(post._id));
@@ -42,26 +44,26 @@ function Post({ post, setSnackBar }) {
       return post.likes.find(
         (like) => like === (user.result.googleId || user.result._id)
       ) ? (
-        <>
+        <React.Fragment>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
             : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
-        </>
+        </React.Fragment>
       ) : (
-        <>
-          <ThumbUpAltOutlined fontSize="small" />
+        <React.Fragment>
+          <ThumbUpAltOutlinedIcon fontSize="small" />
           &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
-        </>
+        </React.Fragment>
       );
     }
 
     return (
-      <>
-        <ThumbUpAltOutlined fontSize="small" />
+      <React.Fragment>
+        <ThumbUpAltOutlinedIcon fontSize="small" />
         &nbsp;Like
-      </>
+      </React.Fragment>
     );
   };
 
@@ -79,17 +81,20 @@ function Post({ post, setSnackBar }) {
             <Moment parse="YYYY-MM-DD HH:mm">{post.createDate}</Moment>
           </Typography>
         </div>
-        <div className={classes.overlay2}>
-          <Button
-            style={{ color: "white", paddingLeft: 50 }}
-            size="small"
-            onClick={() => {
-              handleUpdate();
-            }}
-          >
-            <EditIcon fontSize="small" />
-          </Button>
-        </div>
+        {(user.result.googleId === post.creator ||
+          user.result._id === post.creator) && (
+          <div className={classes.overlay2}>
+            <Button
+              style={{ color: "white", paddingLeft: 50 }}
+              size="small"
+              onClick={() => {
+                handleUpdate();
+              }}
+            >
+              <EditIcon fontSize="small" />
+            </Button>
+          </div>
+        )}
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
             {post.tags.map((tag) => `#${tag} `)}
@@ -109,16 +114,24 @@ function Post({ post, setSnackBar }) {
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary" onClick={() => handleLike()}>
-            <ThumbUpAltIcon fontSize="small" /> Like {post.likeCount}
-          </Button>
           <Button
             size="small"
             color="primary"
-            onClick={() => setDeleteModal(true)}
+            disabled={!user.result}
+            onClick={() => handleLike()}
           >
-            <DeleteIcon fontSize="small" /> Delete
+            <Likes />
           </Button>
+          {(user.result.googleId === post.creator ||
+            user.result._id === post.creator) && (
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => setDeleteModal(true)}
+            >
+              <DeleteIcon fontSize="small" /> Delete
+            </Button>
+          )}
         </CardActions>
       </Card>
       <DeleteModal
