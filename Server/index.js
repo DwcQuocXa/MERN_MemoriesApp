@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("Deploy successfully");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 mongoose
   .connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true })
