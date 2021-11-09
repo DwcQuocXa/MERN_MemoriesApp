@@ -51,7 +51,7 @@ function Form() {
     }
   };
 
-  if (!user) {
+  if (!user?.result?.name) {
     return (
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center">

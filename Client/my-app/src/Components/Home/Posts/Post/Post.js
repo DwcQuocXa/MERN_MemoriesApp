@@ -42,7 +42,7 @@ function Post({ post, setSnackBar }) {
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
-        (like) => like === (user.result.googleId || user.result._id)
+        (like) => like === (user?.result?.googleId || user?.result?._id)
       ) ? (
         <React.Fragment>
           <ThumbUpAltIcon fontSize="small" />
@@ -81,8 +81,8 @@ function Post({ post, setSnackBar }) {
             <Moment parse="YYYY-MM-DD HH:mm">{post.createDate}</Moment>
           </Typography>
         </div>
-        {(user.result.googleId === post.creator ||
-          user.result._id === post.creator) && (
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
           <div className={classes.overlay2}>
             <Button
               style={{ color: "white", paddingLeft: 50 }}
@@ -117,13 +117,13 @@ function Post({ post, setSnackBar }) {
           <Button
             size="small"
             color="primary"
-            disabled={!user.result}
+            disabled={!user}
             onClick={() => handleLike()}
           >
             <Likes />
           </Button>
-          {(user.result.googleId === post.creator ||
-            user.result._id === post.creator) && (
+          {(user?.result?.googleId === post?.creator ||
+            user?.result?._id === post?.creator) && (
             <Button
               size="small"
               color="primary"
